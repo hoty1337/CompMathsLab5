@@ -97,7 +97,7 @@ try:
 	finish_interval = float(
 		input("Введите конечное значение для интервала интерполяции (значение вводится в pi): ")) * np.pi
 	step_interval = float(input("Введите шаг для интервала интерполяции: "))
-	point_count = int(input("Введите кол-во точек: "))
+	# point_count = int(input("Введите кол-во точек: "))
 	if start_interval > finish_interval:
 		print("Ошибка ввода интервала: значение начального интервала больше конечного")
 		sys.exit()
@@ -155,13 +155,14 @@ else:
 
 # Построение графика
 fig, ax = plt.subplots()
-xx = np.linspace(min(x), max(x), point_count)
+xx = np.linspace(min(x), max(x), round((max(x) - min(x)) / step_interval))
 if s == "c" or s == "C":
 	yy = cos(xx)
-if s == "t" or s == "T":
+elif s == "t" or s == "T":
 	yy = tan(xx)
 else:
 	yy = sin(xx)
+
 
 ax.plot(xx, yy, label='Исходная функция')
 ax.plot(x, y, 'o', label='Узлы интерполяции')
